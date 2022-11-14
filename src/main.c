@@ -1,0 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lwee <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 16:22:57 by lwee              #+#    #+#             */
+/*   Updated: 2022/11/14 19:21:50 by lwee             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fractol.h"
+
+int	main(int argc, char **argv)
+{
+	t_fractol	fractal;
+
+	if (argc < 2)
+		exit(1);
+	init_fractal(&fractal, argc, argv);
+	render(&fractal);
+	mlx_key_hook(fractal.window, key_event, &fractal);
+	mlx_loop(fractal.mlx);
+}
