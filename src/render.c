@@ -6,7 +6,7 @@
 /*   By: lwee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 16:00:22 by lwee              #+#    #+#             */
-/*   Updated: 2022/11/15 22:05:21 by lwee             ###   ########.fr       */
+/*   Updated: 2022/11/15 23:06:27 by lwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	interpolate_color(int start_color, int end_color, double scale)
 	start_rgb[0] = (end_rgb[0] - start_rgb[0]) * scale + start_rgb[0];
 	start_rgb[1] = (end_rgb[1] - start_rgb[1]) * scale + start_rgb[1];
 	start_rgb[2] = (end_rgb[2] - start_rgb[2]) * scale + start_rgb[2];
-	return (start_rgb[0] << 16 | start_rgb[1] << 8 | start_rgb[2]);
+	return (0x00 << 24 | start_rgb[0] << 16 | start_rgb[1] << 8 | start_rgb[2]);
 }
 
 void	set_color_mono(t_fractol *fractal, int color)
@@ -84,10 +84,10 @@ void	set_color_multiple(t_fractol *fractal, int colors[3], int n)
 
 void	set_pixel_color(t_fractol *fractal, int x, int y, int color)
 {
-	fractal->buffer[x * 4 + y * WIDTH * 4] = (color) & 0xFF;
-	fractal->buffer[x * 4 + y * WIDTH * 4 + 1] = (color >> 8) & 0xFF;
-	fractal->buffer[x * 4 + y * WIDTH * 4 + 2] = (color >> 16) & 0xFF;
-	fractal->buffer[x * 4 + y * WIDTH * 4 + 3] = (color >> 24) & 0xFF;
+	fractal->buffer[x * 4 + y * WIDTH * 4] = (color);
+	fractal->buffer[x * 4 + y * WIDTH * 4 + 1] = (color >> 8);
+	fractal->buffer[x * 4 + y * WIDTH * 4 + 2] = (color >> 16);
+	fractal->buffer[x * 4 + y * WIDTH * 4 + 3] = (color >> 24);
 }
 
 void	render(t_fractol *fractal)
