@@ -6,7 +6,7 @@
 /*   By: lwee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 18:39:28 by lwee              #+#    #+#             */
-/*   Updated: 2022/11/15 21:28:33 by lwee             ###   ########.fr       */
+/*   Updated: 2022/11/15 22:08:18 by lwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ typedef struct s_fractol
 	double		offset_y;
 	double		kr;
 	double		ki;
+	double		sx;
+	double		rx;
+	double		fx;
 	int			*palette;
 }	t_fractol;
 
@@ -71,4 +74,5 @@ int		key_event(int keycode, t_fractol *fractal);
 int		mouse_event(int keycode, int x, int y, t_fractol *fractal);
 int		mandelbrot(double cr, double ci);
 int		julia(t_fractol *fractal, double zr, double zi);
+int		mandelbox(t_fractol *fractal, double cr, double ci);
 #endif

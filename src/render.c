@@ -6,7 +6,7 @@
 /*   By: lwee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 16:00:22 by lwee              #+#    #+#             */
-/*   Updated: 2022/11/15 21:08:22 by lwee             ###   ########.fr       */
+/*   Updated: 2022/11/15 22:05:21 by lwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ void	render(t_fractol *fractal)
 				iter_count = mandelbrot(pr, pi);
 			if (fractal->type == 2)
 				iter_count = julia(fractal, pr, pi);
+			if (fractal->type == 3)
+				iter_count = mandelbox(fractal, pr, pi);
 			set_pixel_color(fractal, x, y, fractal->palette[iter_count]);
 		}
 	}

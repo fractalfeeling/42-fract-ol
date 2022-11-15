@@ -6,7 +6,7 @@
 /*   By: lwee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:15:14 by lwee              #+#    #+#             */
-/*   Updated: 2022/11/15 20:49:42 by lwee             ###   ########.fr       */
+/*   Updated: 2022/11/15 22:08:00 by lwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ void	init_vars(t_fractol *fractal)
 	{
 		fractal->kr = (double)rand() / RAND_MAX * 2 - 1;
 		fractal->ki = (double)rand() / RAND_MAX * 2 - 1;
+	}
+	if (fractal->type == 3)
+	{
+		fractal->sx = 2.0;
+		fractal->rx = 0.5;
+		fractal->fx = 1.0;
 	}
 	set_color_multiple(fractal, (int [3]){0x000000, 0x00FFFF, 0xFFFFFF}, 3);
 }

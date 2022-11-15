@@ -6,7 +6,7 @@
 #    By: lwee <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 17:13:42 by lwee              #+#    #+#              #
-#    Updated: 2022/11/15 17:44:57 by lwee             ###   ########.fr        #
+#    Updated: 2022/11/15 22:08:43 by lwee             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = fractol
 CC = gcc
 CFLAGS += -Wall -Wextra -Werror -std=c99
 
-FILES := main init render mandelbrot julia event
+FILES := main init render mandelbrot julia mandelbox event
 SRC_DIR = src/
 OBJ_DIR = src/
 INC_DIR = inc/

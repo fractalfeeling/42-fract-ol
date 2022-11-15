@@ -6,7 +6,7 @@
 /*   By: lwee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 16:22:57 by lwee              #+#    #+#             */
-/*   Updated: 2022/11/15 20:49:26 by lwee             ###   ########.fr       */
+/*   Updated: 2022/11/15 22:09:56 by lwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	which_fractal(t_fractol *fractal, int argc, char **argv)
 		fractal->type = 1;
 	else if (ft_strncmp(argv[1], "julia", 6) == 0)
 		fractal->type = 2;
+	else if (ft_strncmp(argv[1], "mandelbox", 10) == 0)
+		fractal->type = 3;
 	else
 		exit(1);
 	if (argc < 2 || argc == 3 || (argc == 4 && fractal->type != 2) || argc > 4)
