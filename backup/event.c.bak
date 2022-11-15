@@ -6,7 +6,7 @@
 /*   By: lwee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:03:53 by lwee              #+#    #+#             */
-/*   Updated: 2022/11/15 20:39:25 by lwee             ###   ########.fr       */
+/*   Updated: 2022/11/15 18:02:53 by lwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 static void	exit_fractol(t_fractol *fractal)
 {
-	mlx_destroy_image(fractal->mlx, fractal->img);
+	mlx_destroy_image(fractal->mlx, fractal->image);
 	mlx_destroy_window(fractal->mlx, fractal->win);
 	free(fractal->mlx);
 	exit(1);
+}
+
+static void	reset_init(t_fractol *fractal)
+{
+	init_position(fractal);
+	init_k_number(fractal, 0, 0);
 }
 
 int	key_event(int keycode, t_fractol *fractal)
@@ -37,7 +43,7 @@ int	key_event(int keycode, t_fractol *fractal)
 	if (keycode == MINUS || keycode == O)
 		fractal->zoom /= 1.37;
 	if (keycode == R)
-		init_vars(fractal);
+		reset_init(fractal);
 	render(fractal);
 	return (0);
 }

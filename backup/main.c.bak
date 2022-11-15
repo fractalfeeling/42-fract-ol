@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 16:12:56 by lwee              #+#    #+#             */
-/*   Updated: 2022/11/15 13:39:28 by lwee             ###   ########.fr       */
+/*   Created: 2022/11/14 16:22:57 by lwee              #+#    #+#             */
+/*   Updated: 2022/11/15 14:34:10 by lwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	mandelbrot(double cr, double ci)
+int	main(int argc, char **argv)
 {
-	double	zr;
-	double	zi;
-	double	tmp;
-	int		i;
+	t_fractol	fractal;
 
-	zr = 0;
-	zi = 0;
-	i = 0;
-	while (i < MAX_ITERATIONS)
-	{
-		if (zr * zr + zi * zi > 4.0)
-			break ;
-		tmp = zr * zr - zi * zi + cr;
-		zi = 2 * zr * zi + ci;
-		zr = tmp;
-		i++;
-	}
-	return (i);
+	if (argc < 2)
+		exit(1);
+	init_fractal(&fractal, argc, argv);
+	render(&fractal);
+	mlx_key_hook(fractal.window, key_event, &fractal);
+	mlx_mouse_hook(fractal.window, mouse_event, &fractal);
+	mlx_loop(fractal.mlx);
 }

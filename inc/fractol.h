@@ -6,7 +6,7 @@
 /*   By: lwee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 18:39:28 by lwee              #+#    #+#             */
-/*   Updated: 2022/11/14 22:22:52 by lwee             ###   ########.fr       */
+/*   Updated: 2022/11/15 21:28:33 by lwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WIDTH 1200
 # define HEIGHT 800
 # define TITLE "Fract-ol"
-# define MAX_ITERATIONS 80
+# define MAX_ITERATIONS 42
 
 # define ESC 53
 # define UP 126
@@ -33,21 +33,26 @@
 # define RIGHT 124
 # define PLUS 24
 # define MINUS 27
+# define W 13
+# define S 1
+# define A 0
+# define D 2
 # define I 34
 # define O 31
+# define R 15
+# define SCROLL_UP 5
+# define SCROLL_DOWN 4
+# define RIGHT_CLICK 1
 
 typedef struct s_fractol
 {
 	void		*mlx;
-	void		*window;
-	void		*image;
+	void		*win;
+	void		*img;
 	char		*buffer;
 	int			type;
+	int			argc;
 	double		zoom;
-	double		min_r;
-	double		max_r;
-	double		min_i;
-	double		max_i;
 	double		offset_x;
 	double		offset_y;
 	double		kr;
@@ -55,14 +60,15 @@ typedef struct s_fractol
 	int			*palette;
 }	t_fractol;
 
-void	init_fractal(t_fractol *fractal, int argc, char **argv);
+void	init_image(t_fractol *fractal);
+void	init_vars(t_fractol *fractal);
 int		interpolate_color(int start_color, int end_color, double scale);
 void	set_color_mono(t_fractol *fractal, int color);
 void	set_color_multiple(t_fractol *fractal, int color[3], int n);
 void	set_pixel_color(t_fractol *fractal, int x, int y, int color);
 void	render(t_fractol *fractal);
-//int	key_event(t_fractol *fractal, int keycode)
 int		key_event(int keycode, t_fractol *fractal);
+int		mouse_event(int keycode, int x, int y, t_fractol *fractal);
 int		mandelbrot(double cr, double ci);
 int		julia(t_fractol *fractal, double zr, double zi);
 #endif
