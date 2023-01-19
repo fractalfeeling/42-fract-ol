@@ -6,7 +6,7 @@
 /*   By: lwee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:03:53 by lwee              #+#    #+#             */
-/*   Updated: 2022/11/15 20:39:25 by lwee             ###   ########.fr       */
+/*   Updated: 2023/01/19 17:07:38 by lwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	key_event(int keycode, t_fractol *fractal)
 {
 	if (keycode == ESC)
 		exit_fractol(fractal);
-	if (keycode == UP || keycode == W)
+	if (keycode == UP || keycode == W || keycode == K)
 		fractal->offset_y -= 0.168 / fractal->zoom;
-	if (keycode == DOWN || keycode == S)
+	if (keycode == DOWN || keycode == S || keycode == J)
 		fractal->offset_y += 0.168 / fractal->zoom;
-	if (keycode == LEFT || keycode == A)
+	if (keycode == LEFT || keycode == A || keycode == H)
 		fractal->offset_x -= 0.168 / fractal->zoom;
-	if (keycode == RIGHT || keycode == D)
+	if (keycode == RIGHT || keycode == D || keycode == L)
 		fractal->offset_x += 0.168 / fractal->zoom;
 	if (keycode == PLUS || keycode == I)
 		fractal->zoom *= 1.37;
@@ -55,13 +55,8 @@ int	mouse_event(int keycode, int x, int y, t_fractol *fractal)
 	if (keycode == SCROLL_DOWN)
 	{
 		fractal->zoom /= 1.37;
-		fractal->offset_x += (double)x / WIDTH / fractal->zoom;
-		fractal->offset_y += (double)y / HEIGHT / fractal->zoom;
-	}
-	if (keycode == RIGHT_CLICK)
-	{
-		fractal->offset_x += (double)x / WIDTH / fractal->zoom * 2.0;
-		fractal->offset_y += (double)y / HEIGHT / fractal->zoom * 2.0;
+		fractal->offset_x -= (double)x / WIDTH / fractal->zoom;
+		fractal->offset_y -= (double)y / HEIGHT / fractal->zoom;
 	}
 	render(fractal);
 	return (0);

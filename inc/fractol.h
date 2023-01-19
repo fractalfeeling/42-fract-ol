@@ -6,7 +6,7 @@
 /*   By: lwee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 18:39:28 by lwee              #+#    #+#             */
-/*   Updated: 2022/11/15 22:08:18 by lwee             ###   ########.fr       */
+/*   Updated: 2023/01/19 17:24:58 by lwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WIDTH 1200
 # define HEIGHT 800
 # define TITLE "Fract-ol"
-# define MAX_ITERATIONS 42
+# define MAX_ITERATIONS 84
 
 # define ESC 53
 # define UP 126
@@ -37,6 +37,10 @@
 # define S 1
 # define A 0
 # define D 2
+# define H 4
+# define J 38
+# define K 40
+# define L 37
 # define I 34
 # define O 31
 # define R 15
@@ -66,9 +70,9 @@ typedef struct s_fractol
 void	init_image(t_fractol *fractal);
 void	init_vars(t_fractol *fractal);
 int		interpolate_color(int start_color, int end_color, double scale);
-void	set_color_mono(t_fractol *fractal, int color);
 void	set_color_multiple(t_fractol *fractal, int color[3], int n);
 void	set_pixel_color(t_fractol *fractal, int x, int y, int color);
+int		count_iterations(t_fractol *fractal, double pr, double pi);
 void	render(t_fractol *fractal);
 int		key_event(int keycode, t_fractol *fractal);
 int		mouse_event(int keycode, int x, int y, t_fractol *fractal);

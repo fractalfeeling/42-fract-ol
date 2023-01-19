@@ -6,7 +6,7 @@
 /*   By: lwee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 16:00:22 by lwee              #+#    #+#             */
-/*   Updated: 2022/11/15 23:06:27 by lwee             ###   ########.fr       */
+/*   Updated: 2023/01/19 17:24:38 by lwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,34 +27,6 @@ int	interpolate_color(int start_color, int end_color, double scale)
 	start_rgb[1] = (end_rgb[1] - start_rgb[1]) * scale + start_rgb[1];
 	start_rgb[2] = (end_rgb[2] - start_rgb[2]) * scale + start_rgb[2];
 	return (0x00 << 24 | start_rgb[0] << 16 | start_rgb[1] << 8 | start_rgb[2]);
-}
-
-void	set_color_mono(t_fractol *fractal, int color)
-{
-	int		i;
-	double	scale;
-	int		color1;
-	int		color2;
-
-	i = 0;
-	while (i < MAX_ITERATIONS)
-	{
-		if (i < MAX_ITERATIONS / 2)
-		{
-			scale = (double)i / (MAX_ITERATIONS / 2.0);
-			color1 = 0x000000;
-			color2 = color;
-		}
-		else
-		{
-			scale = ((double)i - MAX_ITERATIONS / 2.0) / (MAX_ITERATIONS / 2.0);
-			color1 = color2;
-			color2 = 0xFFFFFF;
-		}
-		fractal->palette[i] = interpolate_color(color1, color2, scale);
-		i++;
-	}
-	fractal->palette[MAX_ITERATIONS] = 0;
 }
 
 void	set_color_multiple(t_fractol *fractal, int colors[3], int n)
@@ -90,6 +62,19 @@ void	set_pixel_color(t_fractol *fractal, int x, int y, int color)
 	fractal->buffer[x * 4 + y * WIDTH * 4 + 3] = (color >> 24);
 }
 
+int	count_iterations(t_fractol *fractal, double pr, double pi)
+{
+	int	iter_count;
+
+	if (fractal->type == 1)
+		iter_count = mandelbrot(pr, pi);
+	if (fractal->type == 2)
+		iter_count = julia(fractal, pr, pi);
+	if (fractal->type == 3)
+		iter_count = mandelbox(fractal, pr, pi);
+	return (iter_count);
+}
+
 void	render(t_fractol *fractal)
 {
 	int		x;
@@ -109,12 +94,7 @@ void	render(t_fractol *fractal)
 				/ (0.5 * fractal->zoom * WIDTH) + fractal->offset_x;
 			pi = (y - HEIGHT / 2.0) / (0.5 * fractal->zoom * HEIGHT)
 				+ fractal->offset_y;
-			if (fractal->type == 1)
-				iter_count = mandelbrot(pr, pi);
-			if (fractal->type == 2)
-				iter_count = julia(fractal, pr, pi);
-			if (fractal->type == 3)
-				iter_count = mandelbox(fractal, pr, pi);
+			iter_count = count_iterations(fractal, pr, pi);
 			set_pixel_color(fractal, x, y, fractal->palette[iter_count]);
 		}
 	}
